@@ -4,7 +4,7 @@ Get depth map from one web camera using caffe framework with cpp
 ## Compiling and usage
 
 1. Create a folder called cpp_depth/ in ./caffe/examples/, copy depth.cpp to ./caffe/examples/cpp_depth/
-2. Copy depth_model/ to ./caffe/models/
+2. Copy depth_model/ to ./caffe/models/ (.caffemodel file is too big to upload to github)
 3. In caffe root directory run:
 ```
 $ cd build
