@@ -33,8 +33,8 @@ def testNet(net, img):
     return output
 
 # models
-caffemodel = "model/model_norm_abs_100k.caffemodel"
-deployfile = "model/model_norm_abs_100k.prototxt"
+caffemodel = "depth_model/model_norm_abs_100k.caffemodel"
+deployfile = "depth_model/model_norm_abs_100k.prototxt"
 caffe.set_mode_gpu()
 net = caffe.Net(deployfile, caffemodel, caffe.TEST)
 # camera
