@@ -8,6 +8,7 @@ Get depth map from one web camera using caffe framework with cpp
 3. In caffe root directory run:
 ```
 $ cd build/
+$ cmake ..
 $ make
 $ ./examples/cpp_depth/depth.bin \
   ../models/depth_model/model_norm_abs_100k.prototxt \
