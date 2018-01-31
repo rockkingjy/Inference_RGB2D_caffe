@@ -17,6 +17,9 @@ import argparse
 import operator	
 import shutil
 
+caffemodel = "models/depth_model/model_norm_abs_100k.caffemodel"
+deployfile = "models/depth_model/model_norm_abs_100k.prototxt"
+CAMERA = 0
 WIDTH = 298
 HEIGHT = 218
 OUT_WIDTH = 74
@@ -33,12 +36,10 @@ def testNet(net, img):
     return output
 
 # models
-caffemodel = "depth_model/model_norm_abs_100k.caffemodel"
-deployfile = "depth_model/model_norm_abs_100k.prototxt"
 caffe.set_mode_gpu()
 net = caffe.Net(deployfile, caffemodel, caffe.TEST)
 # camera
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(CAMERA)
 print("VideoIsOpened:",cap.isOpened())
 cap.set(3,WIDTH)
 cap.set(4,HEIGHT)
