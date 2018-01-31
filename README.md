@@ -2,7 +2,7 @@
 # RGB2D_caffe_cpp
 Get depth map from one web camera using caffe framework with cpp and using it to create 3D and SLAM.
 
-## Compiling and usage:
+## Compile and run:
 
 1. Create a folder called cpp_depth/ in ./caffe/examples/, copy all the files to ./caffe/examples/cpp_depth/
 2. Create a folder called depth_model/ in ./caffe/models/ and copy .caffemodel and .protxt file into it(.caffemodel file is too big to upload to github, please download it here: [Link](https://drive.google.com/drive/folders/1TnzjYybQYphd__v5XESVjs9_EOXt6ZWT?usp=sharing)).
@@ -42,7 +42,8 @@ and then do the same thing above.
 1. Make and install [[RTABmap](https://github.com/introlab/rtabmap)].
 2. Put the rgb images in <IMAGEFOLDER>/rgb_sync, the depth images in <IMAGEFOLDER>/depth_sync, and run to create rtabmap.db and rtbmap_poses.txt:
 ```
- ./rtabmap-rgbd_dataset        --Vis/EstimationType 1       --Vis/BundleAdjustment 1       --Vis/PnPReprojError 1.5       --Odom/GuessMotion true       --OdomF2M/BundleAdjustment 1       --Rtabmap/CreateIntermediateNodes true       --Rtabmap/DetectionRate     <IMAGEFOLDER>
+cd /media/enroutelab/sdd/mycodes/rtabmap/bin
+./rtabmap-rgbd_dataset        --Vis/EstimationType 1       --Vis/BundleAdjustment 1       --Vis/PnPReprojError 1.5       --Odom/GuessMotion true       --OdomF2M/BundleAdjustment 1       --Rtabmap/CreateIntermediateNodes true       --Rtabmap/DetectionRate     <IMAGEFOLDER>
 ```
 Example for the TUM data:
 ```
