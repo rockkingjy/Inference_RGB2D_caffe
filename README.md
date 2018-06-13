@@ -19,7 +19,7 @@ cd /media/elab/sdd/mycodes/caffe
 ./build/examples/cpp_depth/depth_camera.bin   \
 ./models/depth_model/model_norm_abs_100k.prototxt  \
  ./models/depth_model/model_norm_abs_100k.caffemodel 
-
+```
 or you can also using directly the python script(now in caffe/):
 ```
 python ./examples/cpp_depth/depth_camera.py
@@ -28,10 +28,6 @@ python ./examples/cpp_depth/depth_camera.py
 ```
 cd ..
 python ./examples/cpp_depth/depth_images.py
-```
-or you can also using the cpp script (not done yet, update later):
-```
-
 ```
 
 ## Run on TX1/2
