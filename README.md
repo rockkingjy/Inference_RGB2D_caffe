@@ -12,7 +12,7 @@ $ cd build/
 $ cmake ..
 $ make
 ```
-4. If you have a camera and need to run in real time, connect your webcamera to the PC and in caffe root directory run(now in caffe/build/):
+4. If you have a camera and need to run in real time, connect your webcamera to the PC and in caffe root directory run:
 ```
 cd /media/elab/sdd/mycodes/caffe
 
