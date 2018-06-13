@@ -14,16 +14,12 @@ $ make
 ```
 4. If you have a camera and need to run in real time, connect your webcamera to the PC and in caffe root directory run(now in caffe/build/):
 ```
-./examples/cpp_depth/depth_camera.bin \
-  ../models/depth_model/model_norm_abs_100k.prototxt \
-  ../models/depth_model/model_norm_abs_100k.caffemodel 
-```
-or(in caffe/):
-```
-./build/examples/cpp_depth/depth_camera.bin \
-  ./models/depth_model/model_norm_abs_100k.prototxt \
-  ./models/depth_model/model_norm_abs_100k.caffemodel 
-```
+cd /media/elab/sdd/mycodes/caffe
+
+./build/examples/cpp_depth/depth_camera.bin   \
+./models/depth_model/model_norm_abs_100k.prototxt  \
+ ./models/depth_model/model_norm_abs_100k.caffemodel 
+
 or you can also using directly the python script(now in caffe/):
 ```
 python ./examples/cpp_depth/depth_camera.py
