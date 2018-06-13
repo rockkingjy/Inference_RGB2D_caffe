@@ -18,12 +18,12 @@ import operator
 import shutil
 
 # caffe model
-caffemodel = "models/depth_model/model_norm_abs_100k.caffemodel"
-deployfile = "models/depth_model/model_norm_abs_100k.prototxt"
+caffemodel = "../../models/depth_model/model_norm_abs_100k.caffemodel"
+deployfile = "../../models/depth_model/model_norm_abs_100k.prototxt"
 
 # images
-input_dir = "/media/enroutelab/sdd/data/tum_depth/rgbd_dataset_freiburg3_long_office_household/rgb_sync"#"/media/enroutelab/sdd/mycodes/rtabmap/bin/0/rgb_sync"
-output_dir = "/media/enroutelab/sdd/data/tum_depth/rgbd_dataset_freiburg3_long_office_household/depth_sync"#"/media/enroutelab/sdd/mycodes/rtabmap/bin/0/depth_sync"
+input_dir = "/media/elab/sdd/caffe/examples/cpp_depth"#"/media/enroutelab/sdd/mycodes/rtabmap/bin/0/rgb_sync"
+output_dir = "/media/elab/sdd/caffe/examples/cpp_depth"#"/media/enroutelab/sdd/mycodes/rtabmap/bin/0/depth_sync"
 
 WIDTH = 298 #width of input of neural net
 HEIGHT = 218
@@ -65,6 +65,37 @@ net = caffe.Net(deployfile, caffemodel, caffe.TEST)
 
 fileCount = len([name for name in os.listdir(input_dir)])
 
+
+# get the depth image for one picture=====================
+inputFileName = "rgb3.jpeg"
+inputFilePath = input_dir + '/' + inputFileName
+input = loadImage(inputFilePath, 3, WIDTH, HEIGHT)	
+input *= 255
+input -= 127
+
+print("input_net shape:",input.shape)#input_net shape: (1, 3, 218, 298)
+output = testNet(net, input) 
+print("output_net shape:",output.shape)#output_net shape: (1, 1, 54, 74)
+    
+#rescale for output
+scaleW = float(SAVE_WIDTH) / float(OUT_WIDTH)
+scaleH = float(SAVE_HEIGHT) / float(OUT_HEIGHT)
+                                        #output_net rescale: (1, 1, 218, 298)    
+output = scipy.ndimage.zoom(output, (1,1,scaleH,scaleW), order=3)
+output = ProcessToOutput(output)
+print("Scaled_output_net shape:",output.shape)
+
+
+imgnp = np.reshape(output, (SAVE_HEIGHT, SAVE_WIDTH, 1))#output shape: (218, 298, 1)
+imgnp = np.array(imgnp * 255, dtype = np.uint8)
+    
+filename = os.path.splitext(os.path.basename(inputFileName))[0]
+filePathAbs = output_dir + '/' + filename + '_out.jpeg'
+print(filePathAbs)
+printImage(imgnp, filePathAbs, 1, SAVE_WIDTH, SAVE_HEIGHT)
+
+"""
+# for a series of images=====================
 # main loop
 for count, file in enumerate(os.listdir(input_dir)): 
 	out_string = str(count) + '/' + str(fileCount) + ': ' + file
@@ -81,7 +112,7 @@ for count, file in enumerate(os.listdir(input_dir)):
 	output = testNet(net, input) 
 	print("output_net shape:",output.shape)#output_net shape: (1, 1, 54, 74)
     
-    #rescale for output
+    	#rescale for output
 	scaleW = float(SAVE_WIDTH) / float(OUT_WIDTH)
 	scaleH = float(SAVE_HEIGHT) / float(OUT_HEIGHT)
                                         #output_net rescale: (1, 1, 218, 298)    
@@ -96,6 +127,7 @@ for count, file in enumerate(os.listdir(input_dir)):
 	filename = os.path.splitext(os.path.basename(inputFileName))[0]
 	filePathAbs = output_dir + '/' + filename + '.png'
 	printImage(imgnp, filePathAbs, 1, SAVE_WIDTH, SAVE_HEIGHT)
+"""
 '''
 for count, file in enumerate(os.listdir(output_dir)): 
 	inputFilePath = output_dir + '/' + file
